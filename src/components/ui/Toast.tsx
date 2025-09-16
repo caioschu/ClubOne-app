@@ -8,12 +8,13 @@ const Toast: React.FC = () => {
       toastOptions={{
         duration: 4000,
         style: {
-          background: 'white',
-          color: '#374151',
-          border: '1px solid #e5e7eb',
-          borderRadius: '12px',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-          padding: '16px',
+          background: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(24px)',
+          color: 'white',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '24px',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+          padding: '16px 20px',
           fontSize: '14px',
           fontWeight: '500'
         },
@@ -22,12 +23,30 @@ const Toast: React.FC = () => {
             primary: '#10b981',
             secondary: 'white',
           },
+          style: {
+            border: '1px solid rgba(16, 185, 129, 0.3)',
+            boxShadow: '0 0 40px rgba(16, 185, 129, 0.3)',
+          }
         },
         error: {
           iconTheme: {
             primary: '#ef4444',
             secondary: 'white',
           },
+          style: {
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            boxShadow: '0 0 40px rgba(239, 68, 68, 0.3)',
+          }
+        },
+        loading: {
+          iconTheme: {
+            primary: '#8b5cf6',
+            secondary: 'white',
+          },
+          style: {
+            border: '1px solid rgba(139, 92, 246, 0.3)',
+            boxShadow: '0 0 40px rgba(139, 92, 246, 0.3)',
+          }
         },
       }}
     />

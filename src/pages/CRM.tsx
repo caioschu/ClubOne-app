@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { 
   Target, 
   Users, 
@@ -31,7 +32,10 @@ const CRM = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
@@ -47,7 +51,7 @@ const CRM = () => {
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Create Campaign */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <h3 className="font-bold text-gray-900 dark:text-white mb-6 flex items-center text-lg">
             <Target className="w-5 h-5 mr-2 text-purple-600" />
             Criar Campanha Flash
@@ -100,7 +104,7 @@ const CRM = () => {
         </div>
 
         {/* Recent Campaigns */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-6">
             <h3 className="font-bold text-gray-900 dark:text-white flex items-center text-lg">
               <BarChart3 className="w-5 h-5 mr-2 text-purple-600" />
@@ -134,6 +138,7 @@ const CRM = () => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import { formatCurrency } from '../utils/formatters';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import toast from 'react-hot-toast';
 import { 
   Search, 
@@ -244,15 +245,18 @@ const POS = () => {
   ];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto min-h-screen">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 max-w-7xl mx-auto pt-24">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Ponto de Venda
             </h1>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+            <p className="text-gray-600 dark:text-gray-300">
               Sistema integrado para vendas em tempo real
             </p>
           </div>
@@ -260,23 +264,21 @@ const POS = () => {
             {/* Demo: Voltar para Admin (só para operadores) */}
             {user?.role === 'operator' && (
               <button
-                onClick={() => addToCart(products.find(p => p.id === item.id)!)}
-                className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-red-600 hover:to-pink-600 transition-all flex items-center space-x-1 sm:space-x-2"
+                onClick={switchToAdmin}
+                className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm flex items-center space-x-2"
               >
-                <Crown className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Voltar Admin</span>
+                <Crown className="w-4 h-4 mr-2" />
+                <span>Admin</span>
               </button>
             )}
 
-            <div className="bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300 px-2 sm:px-4 py-2 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs sm:text-sm font-medium">Online</span>
-              </div>
+            <div className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span>Online</span>
             </div>
-            <div className="text-right hidden sm:block">
-              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Horário</div>
-              <div className="text-sm sm:text-base font-bold text-gray-900 dark:text-white">
+            <div className="text-right hidden sm:block bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl px-4 py-2">
+              <div className="text-xs text-gray-600 dark:text-gray-400">Horário</div>
+              <div className="text-sm font-bold text-gray-900 dark:text-white">
                 {new Date().toLocaleTimeString('pt-BR', { 
                   hour: '2-digit', 
                   minute: '2-digit' 
@@ -291,15 +293,15 @@ const POS = () => {
         {/* Produtos */}
         <div className="lg:col-span-2 space-y-6">
           {/* Busca */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-6 shadow-lg hover:scale-[1.01] transition-all duration-300">
             <div className="relative mb-4">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+              <Search className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Buscar produtos por nome ou categoria..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white text-sm sm:text-lg"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white text-lg"
               />
             </div>
 
@@ -309,44 +311,44 @@ const POS = () => {
                 <button
                   key={item.id}
                   onClick={() => addToCart(products.find(p => p.id === item.id)!)}
-                  className="bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300 p-2 sm:p-3 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/40 transition-colors text-center"
+                  className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-4 text-center hover:scale-105 active:scale-95 transition-all duration-200 group min-h-[80px] touch-manipulation"
                 >
-                  <div className="text-xs sm:text-sm font-medium">{item.name}</div>
-                  <div className="text-xs sm:text-sm">{formatCurrency(item.price)}</div>
+                  <div className="text-base font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">{item.name}</div>
+                  <div className="text-base text-gray-600 dark:text-gray-300 font-semibold">{formatCurrency(item.price)}</div>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Lista de Produtos */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-            <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-6 shadow-lg hover:scale-[1.01] transition-all duration-300">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
               Produtos Disponíveis
             </h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto space-y-0">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="border border-gray-200 dark:border-gray-600 rounded-lg p-3 sm:p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors cursor-pointer"
+                  className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-5 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group min-h-[120px] touch-manipulation"
                   onClick={() => product.stock > 0 && addToCart(product)}
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex-1">
-                      <h4 className="text-sm sm:text-base font-medium text-gray-900 dark:text-white">
+                      <h4 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
                         {product.name}
                       </h4>
-                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 capitalize">
+                      <p className="text-base text-gray-600 dark:text-gray-300 capitalize">
                         {product.category}
                       </p>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm sm:text-base font-bold text-purple-600 dark:text-purple-400">
+                      <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
                         {formatCurrency(product.price)}
                       </div>
-                      <div className={`text-xs ${
-                        product.stock <= 0 ? 'text-red-500' :
-                        product.stock <= (product.minStock || 0) ? 'text-orange-500' :
+                      <div className={`text-sm ${
+                        product.stock <= 0 ? 'text-red-400' :
+                        product.stock <= (product.minStock || 0) ? 'text-orange-400' :
                         'text-gray-500 dark:text-gray-400'
                       }`}>
                         Estoque: {product.stock}
@@ -357,13 +359,13 @@ const POS = () => {
                   
                   <button 
                     disabled={product.stock <= 0}
-                    className={`w-full py-2 rounded-lg transition-colors flex items-center justify-center space-x-1 sm:space-x-2 text-sm ${
+                    className={`w-full py-4 rounded-2xl transition-all duration-200 flex items-center justify-center space-x-2 text-base font-medium min-h-[48px] touch-manipulation active:scale-95 ${
                       product.stock <= 0 
-                        ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed' 
-                        : 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600'
+                        ? 'bg-gray-500/20 text-gray-400 cursor-not-allowed' 
+                        : 'bg-purple-600 text-white hover:bg-purple-700 hover:scale-105'
                     }`}
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-5 h-5" />
                     <span>{product.stock <= 0 ? 'Esgotado' : 'Adicionar'}</span>
                   </button>
                 </div>
@@ -375,9 +377,9 @@ const POS = () => {
         {/* Carrinho */}
         <div className="space-y-6">
           {/* Informações do Cliente */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-              <User className="w-5 h-5 mr-2" />
+          <div className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-6 shadow-lg hover:scale-[1.01] transition-all duration-300">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
+              <User className="w-5 h-5 mr-3 text-purple-400" />
               Cliente
             </h3>
             
@@ -388,34 +390,34 @@ const POS = () => {
                   placeholder="Mesa, Nome ou CPF do cliente"
                   value={customerInfo}
                   onChange={(e) => setCustomerInfo(e.target.value)}
-                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 pr-10 focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                  className="w-full pr-12 px-4 py-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white text-lg touch-manipulation"
                 />
                 {isValidatingCustomer && (
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                    <div className="w-5 h-5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                    <div className="w-5 h-5 border-2 border-purple-400 border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}
               </div>
               
               {/* Saldo do Cliente */}
               {customerBalance !== null && (
-                <div className={`p-3 rounded-lg border-2 ${
+                <div className={`bg-white/90 dark:bg-gray-800/90 border-2 rounded-xl p-4 ${
                   customerBalance > 0 
-                    ? 'border-green-200 bg-green-50 dark:bg-green-900/20' 
-                    : 'border-red-200 bg-red-50 dark:bg-red-900/20'
+                    ? 'border-green-400/50 bg-green-50/50 dark:bg-green-900/20' 
+                    : 'border-red-400/50 bg-red-50/50 dark:bg-red-900/20'
                 }`}>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Saldo Disponível:
                     </span>
                     <span className={`font-bold ${
-                      customerBalance > 0 ? 'text-green-600' : 'text-red-600'
+                      customerBalance > 0 ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {formatCurrency(customerBalance)}
                     </span>
                   </div>
                   {customerBalance <= 0 && (
-                    <div className="text-xs text-red-600 mt-1">
+                    <div className="text-xs text-red-400 mt-2">
                       ⚠️ Cliente precisa adicionar saldo antes da compra
                     </div>
                   )}
@@ -426,13 +428,13 @@ const POS = () => {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setCustomerInfo('rafael')}
-                  className="text-xs bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 px-3 py-2 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/40"
+                  className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-lg text-xs px-3 py-2 hover:scale-105 transition-all duration-300 text-gray-700 dark:text-gray-300"
                 >
                   🎯 Rafael (R$ 127,50)
                 </button>
                 <button
                   onClick={() => setCustomerInfo('ana')}
-                  className="text-xs bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300 px-3 py-2 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/40"
+                  className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-lg text-xs px-3 py-2 hover:scale-105 transition-all duration-300 text-gray-700 dark:text-gray-300"
                 >
                   🎯 Ana (Sem saldo)
                 </button>
@@ -441,16 +443,16 @@ const POS = () => {
           </div>
 
           {/* Carrinho */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-6 shadow-lg hover:scale-[1.01] transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
-                <ShoppingCart className="w-5 h-5 mr-2" />
+                <ShoppingCart className="w-5 h-5 mr-3 text-purple-400" />
                 Carrinho ({getTotalItems()})
               </h3>
               {cart.length > 0 && (
                 <button
                   onClick={clearCart}
-                  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm flex items-center space-x-1"
+                  className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm flex items-center space-x-1 bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-lg px-3 py-1 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                   <span>Limpar</span>
@@ -459,20 +461,22 @@ const POS = () => {
             </div>
 
             {cart.length === 0 ? (
-              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                <ShoppingCart className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>Carrinho vazio</p>
-                <p className="text-sm">Adicione produtos para começar</p>
+              <div className="text-center py-8 text-white/50">
+                <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 flex items-center justify-center mx-auto mb-4">
+                  <ShoppingCart className="w-8 h-8 text-gray-400" />
+                </div>
+                <p className="text-gray-600 dark:text-gray-300">Carrinho vazio</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Adicione produtos para começar</p>
               </div>
             ) : (
-              <div className="space-y-3 max-h-64 overflow-y-auto mb-4">
+              <div className="space-y-3 max-h-64 overflow-y-auto mb-6">
                 {cart.map((item) => (
-                  <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <div key={item.id} className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-4 hover:scale-[1.02] transition-all duration-300 group">
                     <div className="flex-1">
-                      <h4 className="font-medium text-gray-900 dark:text-white text-sm">
+                      <h4 className="font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
                         {item.name}
                       </h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-300">
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
                         {formatCurrency(item.price)} cada
                       </p>
                     </div>
@@ -480,27 +484,27 @@ const POS = () => {
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-6 h-6 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-500"
+                        className="w-10 h-10 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 touch-manipulation"
                       >
-                        <Minus className="w-3 h-3" />
+                        <Minus className="w-4 h-4 text-gray-600 dark:text-gray-300" />
                       </button>
                       
-                      <span className="w-8 text-center font-medium text-gray-900 dark:text-white">
+                      <span className="w-10 text-center font-medium text-gray-900 dark:text-white text-lg">
                         {item.quantity}
                       </span>
                       
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-6 h-6 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-500"
+                        className="w-10 h-10 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 touch-manipulation"
                       >
-                        <Plus className="w-3 h-3" />
+                        <Plus className="w-4 h-4 text-gray-600 dark:text-gray-300" />
                       </button>
                       
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="w-6 h-6 bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center hover:bg-red-200 dark:hover:bg-red-900/40 ml-2"
+                        className="w-10 h-10 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 text-red-600 dark:text-red-400 ml-2 touch-manipulation"
                       >
-                        <X className="w-3 h-3" />
+                        <X className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -510,25 +514,25 @@ const POS = () => {
 
             {/* Total */}
             {cart.length > 0 && (
-              <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
+              <div className="border-t border-white/10 pt-6">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
                     Total:
                   </span>
-                  <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
                     {formatCurrency(getTotalAmount())}
                   </span>
                 </div>
 
                 {/* Método de Pagamento */}
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                     Método de Pagamento
                   </label>
                   <select
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-4 focus:border-purple-500 focus:outline-none dark:bg-gray-700 dark:text-white text-lg touch-manipulation"
                   >
                     <option value="cashless">Cashless (Saldo Digital)</option>
                     <option value="card">Cartão de Crédito/Débito</option>
@@ -537,7 +541,7 @@ const POS = () => {
                   </select>
                   
                   {paymentMethod === 'cashless' && customerBalance !== null && customerBalance < getTotalAmount() && (
-                    <div className="mt-2 text-xs text-red-600 dark:text-red-400">
+                    <div className="mt-3 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg p-2">
                       ⚠️ Saldo insuficiente para este método de pagamento
                     </div>
                   )}
@@ -553,16 +557,16 @@ const POS = () => {
                     isValidatingCustomer ||
                     (paymentMethod === 'cashless' && (customerBalance === null || customerBalance < getTotalAmount()))
                   }
-                  className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-green-600 text-white py-5 rounded-lg font-semibold flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-700 active:scale-95 transition-all duration-200 text-lg min-h-[56px] touch-manipulation"
                 >
                   {isProcessing ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                       <span>Processando...</span>
                     </>
                   ) : (
                     <>
-                      <Check className="w-5 h-5" />
+                      <Check className="w-6 h-6 mr-2" />
                       <span>Finalizar Venda</span>
                     </>
                   )}
@@ -571,6 +575,7 @@ const POS = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { useStore } from '../store/useStore';
 import { formatCurrency } from '../utils/formatters';
 import { 
@@ -49,7 +50,10 @@ const Sales = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -66,7 +70,7 @@ const Sales = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <DollarSign className="w-6 h-6 text-green-600" />
             <span className="text-sm font-medium text-green-600">+28%</span>
@@ -77,7 +81,7 @@ const Sales = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Vendas Hoje</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <ShoppingCart className="w-6 h-6 text-blue-600" />
             <span className="text-sm font-medium text-blue-600">+15%</span>
@@ -86,7 +90,7 @@ const Sales = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Itens Vendidos</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <Package className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-red-600">-3</span>
@@ -95,7 +99,7 @@ const Sales = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Produtos Ativos</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <AlertTriangle className="w-6 h-6 text-orange-600" />
             <span className="text-sm font-medium text-orange-600">{criticalStockProducts}</span>
@@ -106,7 +110,7 @@ const Sales = () => {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50">
         <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="flex space-x-8 px-6">
             <button
@@ -289,6 +293,7 @@ const Sales = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

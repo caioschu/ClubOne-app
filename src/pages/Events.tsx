@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { Calendar, Plus, Music, Users, Ticket, X, Save, Star, Clock, MapPin } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import toast from 'react-hot-toast';
@@ -137,7 +138,11 @@ const Events = () => {
   const allEvents = [...mockEvents, ...events];
 
   return (
-    <div className="p-6 min-h-screen">
+    <>
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
@@ -156,7 +161,7 @@ const Events = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <Calendar className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+12%</span>
@@ -165,7 +170,7 @@ const Events = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Eventos Ativos</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <Ticket className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+28%</span>
@@ -176,7 +181,7 @@ const Events = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Ingressos Vendidos</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <Users className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+35%</span>
@@ -187,7 +192,7 @@ const Events = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Receita Total</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <Music className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+8%</span>
@@ -200,7 +205,7 @@ const Events = () => {
       </div>
 
       {/* Events List */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Eventos</h3>
         
         {allEvents.length === 0 ? (
@@ -212,7 +217,7 @@ const Events = () => {
         ) : (
           <div className="grid gap-6">
             {allEvents.map((event) => (
-              <div key={event.id} className="border border-gray-200 dark:border-gray-600 rounded-xl p-6 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+              <div key={event.id} className="bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl p-6 hover:scale-[1.01] hover:shadow-lg transition-all duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
@@ -300,6 +305,8 @@ const Events = () => {
           </div>
         )}
       </div>
+      </div>
+    </div>
 
       {/* Modal de Novo Evento */}
       {showModal && (
@@ -312,7 +319,7 @@ const Events = () => {
             />
             
             {/* Modal */}
-            <div className="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto">
+            <div className="relative w-full max-w-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 max-h-[90vh] overflow-y-auto">
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Criar Novo Evento</h2>
@@ -509,7 +516,7 @@ const Events = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

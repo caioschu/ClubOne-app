@@ -8,6 +8,15 @@ interface AppState {
   establishment: Establishment | null;
   isAuthenticated: boolean;
   
+  // UI State
+  sidebarOpen: boolean;
+  loading: boolean;
+  
+  // Actions
+  setUser: (user: User | null) => void;
+  setAuthenticated: (authenticated: boolean) => void;
+  logout: () => void;
+  
   // Dashboard
   stats: DashboardStats | null;
   alerts: Alert[];
@@ -178,7 +187,9 @@ export const useStore = create<AppState>()(
         loading: false,
         
         // Actions
-        setUser: (user) => set({ user }),
+        setUser: (user) => set({ user, isAuthenticated: !!user }),
+        setAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
+        logout: () => set({ user: null, isAuthenticated: false }),
         setEstablishment: (establishment) => set({ establishment }),
         setSidebarOpen: (sidebarOpen) => set({ sidebarOpen }),
         setLoading: (loading) => set({ loading }),

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { Settings as SettingsIcon, User, Bell, Shield, Save, Users, Building2, Upload, Camera, Edit3 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import toast from 'react-hot-toast';
@@ -86,7 +87,10 @@ const Settings = () => {
     toast.success(`Logado como ${name} (${role})`);
   };
   return (
-    <div className="p-6">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Configurações</h1>
         <p className="text-gray-600">Gerencie suas preferências e configurações do sistema</p>
@@ -122,7 +126,7 @@ const Settings = () => {
       <div className="grid lg:grid-cols-4 gap-8">
         {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-4 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
             <nav className="space-y-1">
               {tabs.map((tab) => (
                 <button
@@ -144,7 +148,7 @@ const Settings = () => {
 
         {/* Content */}
         <div className="lg:col-span-3">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
             {activeTab === 'profile' && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
@@ -419,6 +423,7 @@ const Settings = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

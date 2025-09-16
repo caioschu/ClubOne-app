@@ -97,7 +97,8 @@ const TicketSalesSection = () => {
                     <input 
                       type="text" 
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-indigo-500 focus:outline-none font-medium"
-                      value="Gusttavo Lima - Turnê Buteco 2025"
+                      defaultValue="Gusttavo Lima - Turnê Buteco 2025"
+                      readOnly
                     />
                   </div>
 
@@ -107,7 +108,8 @@ const TicketSalesSection = () => {
                       <input 
                         type="date" 
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-indigo-500 focus:outline-none"
-                        value="2025-02-15"
+                        defaultValue="2025-02-15"
+                        readOnly
                       />
                     </div>
                     <div>
@@ -115,14 +117,19 @@ const TicketSalesSection = () => {
                       <input 
                         type="time" 
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-indigo-500 focus:outline-none"
-                        value="22:00"
+                        defaultValue="22:00"
+                        readOnly
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Gênero Musical</label>
-                    <select className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-indigo-500 focus:outline-none">
+                    <select 
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-indigo-500 focus:outline-none"
+                      defaultValue="sertanejo"
+                      disabled
+                    >
                       <option>Sertanejo</option>
                       <option>Funk</option>
                       <option>Eletrônica</option>

@@ -1,9 +1,13 @@
 import React from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { BarChart3, TrendingUp, Download, RefreshCw } from 'lucide-react';
 
 const Analytics = () => {
   return (
-    <div className="p-6 min-h-screen">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
@@ -29,7 +33,7 @@ const Analytics = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <TrendingUp className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+28%</span>
@@ -38,7 +42,7 @@ const Analytics = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Receita Total</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <BarChart3 className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+15%</span>
@@ -47,7 +51,7 @@ const Analytics = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Clientes Únicos</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <TrendingUp className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-green-600">+8%</span>
@@ -56,7 +60,7 @@ const Analytics = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Ticket Médio</div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <BarChart3 className="w-6 h-6 text-purple-600" />
             <span className="text-sm font-medium text-red-600">-2%</span>
@@ -66,9 +70,10 @@ const Analytics = () => {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Gráficos e Relatórios</h3>
         <div className="text-gray-600 dark:text-gray-300">Carregando dados analíticos...</div>
+      </div>
       </div>
     </div>
   );

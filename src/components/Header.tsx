@@ -2,18 +2,20 @@ import React from 'react';
 import { useStore } from '../store/useStore';
 import { useDarkMode } from '../hooks/useDarkMode';
 import Logo from './ui/Logo';
+import NotificationCenter from './NotificationCenter';
 import { 
-  Bell, 
   Settings, 
   User, 
   Sun,
   Moon,
   Wifi,
-  Crown
+  Crown,
+  Menu,
+  X
 } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const { user, establishment, setUser } = useStore();
+  const { user, establishment, setUser, sidebarOpen, setSidebarOpen } = useStore();
   const { isDark, toggleDarkMode } = useDarkMode();
 
   const switchToAdmin = () => {
@@ -26,13 +28,27 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 right-0 left-0 lg:left-64 z-30 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl h-16">
-      <div className="flex items-center justify-between h-full px-6">
+    <>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="lg:hidden fixed top-6 left-6 z-50 glass-card p-3 transition-all duration-300 hover:scale-110"
+      >
+        {sidebarOpen ? 
+          <X className="w-5 h-5 text-white" /> : 
+          <Menu className="w-5 h-5 text-white" />
+        }
+      </button>
+
+      {/* Glass Header */}
+      <header className="fixed top-4 left-4 lg:left-80 right-4 h-16 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl 
+                         border border-gray-200/50 dark:border-gray-700/50 rounded-3xl px-6 z-30
+                         shadow-lg flex items-center justify-between">
         {/* Estabelecimento Info */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-3">
             {/* Logo da Empresa */}
-            <div className="w-8 h-8 rounded-lg overflow-hidden bg-black flex items-center justify-center flex-shrink-0 hidden sm:flex">
+            <div className="w-10 h-10 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center flex-shrink-0">
               {establishment?.logo ? (
                 <img 
                   src={establishment.logo} 
@@ -40,64 +56,65 @@ const Header: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="text-white text-xs font-bold">LOGO</div>
+                <div className="text-gray-600 dark:text-gray-300 text-xs font-bold">LOGO</div>
               )}
             </div>
             
-            <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse shadow-sm"></div>
-            <span className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
+            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="font-semibold text-gray-900 dark:text-white text-base">
               {establishment?.name || 'Club One'}
             </span>
           </div>
-          <div className="hidden md:flex items-center space-x-1 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+          <div className="hidden md:flex items-center space-x-2 bg-green-100/80 dark:bg-green-900/30 backdrop-blur-xl border border-green-200/50 dark:border-green-700/50 rounded-full px-3 py-1 text-xs font-medium text-green-800 dark:text-green-300">
             <Wifi className="w-3 h-3" />
             <span>847 pessoas ativas</span>
           </div>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          {/* Demo: Voltar para Admin (só aparece se não for admin) */}
+        <div className="flex items-center space-x-3">
+          {/* Demo: Voltar para Admin */}
           {user?.role !== 'admin' && (
             <button
               onClick={switchToAdmin}
-              className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 sm:px-3 py-1.5 rounded-lg text-xs font-medium hover:from-red-600 hover:to-pink-600 transition-all flex items-center space-x-1"
+              className="px-4 py-2 rounded-xl font-semibold text-white text-sm
+                         bg-gradient-to-r from-purple-600 to-blue-600
+                         hover:from-purple-700 hover:to-blue-700
+                         active:scale-95 transition-all duration-300
+                         flex items-center space-x-2"
               title="Voltar para Admin (Demo)"
             >
-              <Crown className="w-3 h-3 sm:mr-1" />
-              <span className="hidden sm:inline">Admin</span>
+              <Crown className="w-4 h-4 mr-2" />
+              <span>Admin</span>
             </button>
           )}
 
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="p-1.5 sm:p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all hover:scale-110"
+            className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-3 transition-all duration-300 hover:scale-105"
             title={isDark ? 'Modo Claro' : 'Modo Escuro'}
           >
             {isDark ? (
-              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+              <Sun className="w-5 h-5 text-yellow-400" />
             ) : (
-              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
+              <Moon className="w-5 h-5 text-gray-600" />
             )}
           </button>
 
           {/* Notifications */}
-          <button className="relative p-1.5 sm:p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all hover:scale-110">
-            <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300" />
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-sm">
-              <span className="text-xs text-white font-bold">3</span>
-            </div>
-          </button>
+          <div className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-3 transition-all duration-300 hover:scale-105">
+            <NotificationCenter />
+          </div>
 
           {/* Settings */}
-          <button className="p-1.5 sm:p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all hover:scale-110 hidden sm:block">
-            <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300" />
+          <button className="bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-3 transition-all duration-300 hover:scale-105 hidden sm:block">
+            <Settings className="w-5 h-5 text-gray-600 dark:text-gray-300" />
           </button>
 
           {/* User Profile */}
-          <div className="flex items-center space-x-1 sm:space-x-2 pl-2 sm:pl-3">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full flex items-center justify-center shadow-sm overflow-hidden">
+          <div className="flex items-center space-x-3 bg-white/90 dark:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl px-4 py-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full flex items-center justify-center overflow-hidden">
               {user?.avatar ? (
                 <img 
                   src={user.avatar} 
@@ -105,14 +122,14 @@ const Header: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <User className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                <User className="w-4 h-4 text-white" />
               )}
             </div>
             <div className="hidden md:block">
-              <div className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
+              <div className="text-sm font-medium text-gray-900 dark:text-white">
                 {user?.name || 'Usuário'}
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-300 capitalize">
+              <div className="text-xs text-gray-600 dark:text-gray-400 capitalize">
                 {user?.role === 'admin' ? 'Administrador' : 
                  user?.role === 'manager' ? 'Gerente' : 
                  'Operador'}
@@ -120,8 +137,8 @@ const Header: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

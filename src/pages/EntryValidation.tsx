@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LiquidGlassBackground from '../components/ui/LiquidGlassBackground';
 import { useStore } from '../store/useStore';
 import { formatCurrency } from '../utils/formatters';
 import toast from 'react-hot-toast';
@@ -150,7 +151,10 @@ const EntryValidation = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="min-h-screen relative">
+      <LiquidGlassBackground />
+      
+      <div className="relative z-10 p-6 pt-24">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Validação de Entrada
@@ -162,7 +166,7 @@ const EntryValidation = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-0 hover:transform hover:scale-105">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-green-100 to-green-200 dark:from-green-900/20 dark:to-green-800/20">
               <Users className="w-5 h-5 text-green-600" />
@@ -176,7 +180,7 @@ const EntryValidation = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Pessoas Dentro</div>
         </div>
 
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-0 hover:transform hover:scale-105">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-900/20 dark:to-blue-800/20">
               <QrCode className="w-5 h-5 text-blue-600" />
@@ -190,7 +194,7 @@ const EntryValidation = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Ingressos Válidos</div>
         </div>
 
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-0 hover:transform hover:scale-105">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-purple-100 to-purple-200 dark:from-purple-900/20 dark:to-purple-800/20">
               <Clock className="w-5 h-5 text-purple-600" />
@@ -203,7 +207,7 @@ const EntryValidation = () => {
           <div className="text-sm text-gray-600 dark:text-gray-300">Tempo de Entrada</div>
         </div>
 
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-0 hover:transform hover:scale-105">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-orange-100 to-orange-200 dark:from-orange-900/20 dark:to-orange-800/20">
               <AlertTriangle className="w-5 h-5 text-orange-600" />
@@ -219,7 +223,7 @@ const EntryValidation = () => {
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Search Section */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-0">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
             Buscar Cliente
           </h3>
@@ -327,7 +331,7 @@ const EntryValidation = () => {
         </div>
 
         {/* Customer Info */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-0">
+        <div className="bg-white/90 dark:bg-gray-800/90 rounded-xl p-6 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
             Informações do Cliente
           </h3>
@@ -518,6 +522,7 @@ const EntryValidation = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };
